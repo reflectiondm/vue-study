@@ -46,6 +46,10 @@ export default {
         type: this.type
       });
       this.message = '';
+
+      setTimeout(() => {
+        this.messages.shift();
+      }, 5000);
     }
   },
   components: {
