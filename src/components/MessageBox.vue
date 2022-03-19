@@ -22,14 +22,14 @@
 export default {
   name: "MessageBox",
   props: {
-    messageType: String,
+    type: String,
     message: String,
   },
   computed: {
     classObject: function () {
       return {
-        warning: this.messageType === "warn",
-        success: this.messageType === "success",
+        warning: this.type === "warn",
+        success: this.type === "success",
       };
     },
   },

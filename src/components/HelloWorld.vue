@@ -3,9 +3,9 @@
     <h1>{{ msg }}</h1>
     <MessageBox 
       v-for="item in messages" 
+      class="bordered"
       :key="item.id" 
-      v-bind:messageType="item.type" 
-      v-bind:message="item.message" />
+      v-bind="item"/>
     <form>
       <input 
         type="checkbox"  
@@ -17,7 +17,7 @@
       <input v-model="message" placeholder="put the message here"/>
       <button 
         type="submit" 
-        v-on:click.prevent="say"
+        @click.prevent="say"
         v-bind:disabled="!canSubmit">say</button>
     </form>
   </div>
@@ -65,6 +65,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.bordered {
+  border: 2px solid #42b983;
+}
 button {
   background: #42b983;
   border-color: lightgreen;
