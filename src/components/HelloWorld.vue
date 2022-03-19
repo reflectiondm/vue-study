@@ -7,13 +7,11 @@
       :key="item.id" 
       v-bind="item"/>
     <form>
-      <input 
-        type="checkbox"  
-        id="isError" 
-        v-model="type" 
-        true-value="warn" 
-        false-value="success"/>
-      <label for="isError">Error</label>
+      <BaseCheckbox
+        v-model="type"
+        true-value="warn"
+        false-value="success"><b>Error</b>
+      </BaseCheckbox>
       <input v-model="message" placeholder="put the message here"/>
       <button 
         type="submit" 
@@ -25,6 +23,7 @@
 
 <script>
 import MessageBox from './MessageBox';
+import BaseCheckbox from './BaseCheckbox';
 
 export default {
   name: "HelloWorld",
@@ -53,7 +52,8 @@ export default {
     }
   },
   components: {
-    MessageBox
+    MessageBox,
+    BaseCheckbox
   },
   computed: {
     canSubmit: function() {

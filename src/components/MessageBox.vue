@@ -25,6 +25,7 @@ export default {
     type: String,
     message: String,
   },
+  inheritAttrs: false,
   computed: {
     classObject: function () {
       return {
