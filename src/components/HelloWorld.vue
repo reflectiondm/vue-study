@@ -1,9 +1,25 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <MessageBox v-bind:messageType="type" v-bind:message="message"></MessageBox>
-    <input v-model="message" />
-    <button v-on:click="toggleMessage">say</button>
+    <MessageBox 
+      v-for="item in messages" 
+      :key="item.id" 
+      v-bind:messageType="item.type" 
+      v-bind:message="item.message" />
+    <form>
+      <input 
+        type="checkbox"  
+        id="isError" 
+        v-model="type" 
+        true-value="warn" 
+        false-value="success"/>
+      <label for="isError">Error</label>
+      <input v-model="message" placeholder="put the message here"/>
+      <button 
+        type="submit" 
+        v-on:click.prevent="say"
+        v-bind:disabled="!canSubmit">say</button>
+    </form>
   </div>
 </template>
 
@@ -17,24 +33,28 @@ export default {
   },
   data: function () {
     return {
-      message: "oopsy",
-      type: "warn",
+      message: "",
+      type: "success",
       messages: []
     };
   },
   methods: {
-    toggleMessage: function () {
-      if (this.type === "warn") {
-        this.type = "success";
-        this.message = "dasy";
-      } else {
-        this.type = "warn";
-        this.message = "oopsy";
-      }
-    },
+    say: function() {
+      this.messages.push({
+        id: Math.floor(Math.random()*100),
+        message: this.message,
+        type: this.type
+      });
+      this.message = '';
+    }
   },
   components: {
     MessageBox
+  },
+  computed: {
+    canSubmit: function() {
+      return this.message.length > 0;
+    }
   }
 };
 </script>
@@ -48,6 +68,9 @@ button {
   padding: 5px;
   min-width: 60px;
   margin: 5px;
+}
+label {
+  padding: 5px;
 }
 input {
   padding: 5px;
