@@ -1,11 +1,13 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <MessageBox 
-      v-for="item in messages" 
-      class="bordered"
-      :key="item.id" 
-      v-bind="item"/>
+    <transition-group name="message" tag='div'>
+      <MessageBox 
+        v-for="item in messages" 
+        class="bordered message-item"
+        :key="item.id" 
+        v-bind="item"/>
+    </transition-group>
     <form>
       <BaseCheckbox
         v-model="type"
@@ -65,6 +67,30 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.message-item {
+
+}
+.message-enter-active {
+  transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.message-leave-active {
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.message-enter {
+  opacity: 0;
+  height: 0;
+}
+
+.message-enter-active {
+  max-height: 100%;
+}
+
+ .message-leave-to {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
 .bordered {
   border: 2px solid #42b983;
 }
