@@ -19,8 +19,10 @@
 </style>
 
 <script>
+import { logCycleMixing, mouseTrack } from './LogCycleMixin'
 export default {
   name: "MessageBox",
+  mixins: [logCycleMixing, mouseTrack()],
   props: {
     type: String,
     message: String,
